@@ -19,8 +19,8 @@ public class RadminClient {
             BufferedInputStream bis = new BufferedInputStream(new FileInputStream(
                     "C:\\Users\\Dima Bulat\\Desktop\\screen.jpg"));
 
-            long l = new File(
-                    "C:\\Users\\Dima Bulat\\Desktop\\screen.jpg").length();
+            os.writeLong(new File(
+                    "C:\\Users\\Dima Bulat\\Desktop\\screen.jpg").length());
 
             byte[] b = new byte[1024];
             int readBytes;
@@ -29,8 +29,9 @@ public class RadminClient {
             }
             Thread.sleep(1000);
             os.flush();
-            os.close();
+
 
         }
+        //os.close();
     }
 }

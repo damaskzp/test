@@ -13,19 +13,27 @@ public class RadminServer {
         RadminServerWindow radminServerWindow = new RadminServerWindow();
         while (true) {
             System.out.println("server");
-            InputStream is = socket.getInputStream();
+            DataInputStream is = new DataInputStream(socket.getInputStream());
             FileOutputStream fileOutputStream = new FileOutputStream(
                     "C:\\Users\\Dima Bulat\\Desktop\\1\\screen.jpg");
 
-
+            long size = is.readLong();
+            long writeBytes = 0;
+            int lastRead = 0;
             byte[] b = new byte[1024];
-            int writeBytes;
-            while ((writeBytes = is.read(b)) != -1) {
-                fileOutputStream.write(b, 0, writeBytes);
+
+            while (true) {
+                lastRead = is.read(b);
+                writeBytes += lastRead;
+                fileOutputStream.write(b, 0, lastRead);
+                if (writeBytes >= size) {
+                    break;
+                }
             }
+
             fileOutputStream.flush();
             fileOutputStream.close();
-            System.out.println("close filr");
+            System.out.println("close file");
             Thread.sleep(1000);
             radminServerWindow.Refresh();
         }
