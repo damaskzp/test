@@ -10,10 +10,14 @@ public class RadminServerWindow extends JFrame {
     private JPanel rootPanel;
 
     public RadminServerWindow()throws IOException{
-        setSize(1024,768);
+        setSize(500,500);
         setContentPane(rootPanel);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        Refresh();
+    }
+
+    public void Refresh() throws IOException {
         BufferedImage image= ImageIO.read(new File(
                 "C:\\Users\\Dima Bulat\\Desktop\\1\\screen.jpg"));
         getGraphics().drawImage(image,0,0,this);

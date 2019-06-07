@@ -10,7 +10,7 @@ import java.net.Socket;
 public class RadminClient {
     public static void main(String[] args) throws IOException, AWTException, InterruptedException {
         Socket socket = new Socket("172.30.2.80", 8090);
-        OutputStream os = socket.getOutputStream();
+        DataOutputStream os = new DataOutputStream(socket.getOutputStream());
         while (true) {
             BufferedImage image = new Robot().createScreenCapture(
                     new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
@@ -18,14 +18,19 @@ public class RadminClient {
                     new File("C:\\Users\\Dima Bulat\\Desktop\\screen.jpg"));
             BufferedInputStream bis = new BufferedInputStream(new FileInputStream(
                     "C:\\Users\\Dima Bulat\\Desktop\\screen.jpg"));
+
+            long l = new File(
+                    "C:\\Users\\Dima Bulat\\Desktop\\screen.jpg").length();
+
             byte[] b = new byte[1024];
             int readBytes;
             while ((readBytes = bis.read(b)) != -1) {
                 os.write(b, 0, readBytes);
             }
+            Thread.sleep(1000);
             os.flush();
             os.close();
-            Thread.sleep(1000);
+
         }
     }
 }
