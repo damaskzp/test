@@ -17,6 +17,9 @@ public class CLLoader extends ClassLoader {
                 c = findClass(name);
             }
         }
+        if (c == null) {
+            c = findClass(name);
+        }
         return c;
     }
 
