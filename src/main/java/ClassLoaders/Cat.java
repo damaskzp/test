@@ -2,6 +2,6 @@ package ClassLoaders;
 
 public class Cat {
     public Cat(){
-        System.out.println("Maaaaaaaaa!!!!");
+        System.out.println("Mrrrrrrrr!!!!");
     }
 }
