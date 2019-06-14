@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+
 public class MyHandler implements InvocationHandler {
     private Object target;
 
@@ -15,9 +16,15 @@ public class MyHandler implements InvocationHandler {
     public Object invoke(Object proxy,
                          Method method,
                          Object[] args) throws Throwable {
-        System.out.println("The Method < " + method.getName() + " > invoked with arg:" + Arrays.toString(args));
         Object result = method.invoke(target, args);
-        System.out.println("The Method < " + method.getName() + " > ends with result: " + result.toString());
+
+        Method originalMethod = target.getClass().getMethod(method.getName(), method.getParameterTypes());
+
+        if (originalMethod.isAnnotationPresent(Logger.class)) {
+            Logger logger = originalMethod.getAnnotation(Logger.class);
+            System.out.println(logger.prefix() + "The Method < " + method.getName() + " > invoked with arg:" + Arrays.toString(args));
+            System.out.println(logger.prefix() + "The Method < " + method.getName() + " > ends with result: " + result.toString());
+        }
         return result;
     }
 }
