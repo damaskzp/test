@@ -15,6 +15,7 @@ public class CalcStarter {
                 calculators.getClass().getInterfaces(),
                 new MyHandler(new Calculators()));
         System.out.println(proxyCalc.getClass());
+
         int add=proxyCalc.add(2,4);
         int mul=proxyCalc.mul(4,3);
         System.out.println(add);
